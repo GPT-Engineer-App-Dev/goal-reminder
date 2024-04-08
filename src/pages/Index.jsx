@@ -1,15 +1,42 @@
-// Complete the Index page component here
-// Use chakra-ui
-import { Button } from "@chakra-ui/react"; // example
-import { FaPlus } from "react-icons/fa"; // example - use react-icons/fa for icons
+import { useState } from "react";
+import { Box, Button, Input, HStack, VStack, StackDivider, Spacer, Text } from "@chakra-ui/react";
+import { FaPlus } from "react-icons/fa";
+import Nav from "../components/Nav";
 
 const Index = () => {
-  // TODO: Create the website here!
+  const [todo, setTodo] = useState("");
+  const [todos, setTodos] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!todo) return;
+    setTodos([...todos, todo]);
+    setTodo("");
+  };
+
   return (
-    <Button>
-      Hello world! <FaPlus />
-    </Button>
-  ); // example
+    <VStack>
+      <Nav />
+      <Box p={8}>
+        <form onSubmit={handleSubmit}>
+          <HStack>
+            <Input variant="filled" placeholder="Add a todo item" value={todo} onChange={(e) => setTodo(e.target.value)} />
+            <Button colorScheme="blue" type="submit" px={8}>
+              <FaPlus />
+            </Button>
+          </HStack>
+        </form>
+        <VStack divider={<StackDivider />} borderColor="gray.100" borderWidth={2} p={4} borderRadius={8} w="100%" maxW={{ base: "90vw", sm: "80vw", lg: "50vw", xl: "30vw" }} alignItems="stretch" mt={8}>
+          {todos.map((todo, index) => (
+            <HStack key={index}>
+              <Text>{todo}</Text>
+              <Spacer />
+            </HStack>
+          ))}
+        </VStack>
+      </Box>
+    </VStack>
+  );
 };
 
 export default Index;
