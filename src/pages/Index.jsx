@@ -21,7 +21,7 @@ const Index = () => {
         <form onSubmit={handleSubmit}>
           <HStack>
             <Input variant="filled" placeholder="Add a todo item" value={todo} onChange={(e) => setTodo(e.target.value)} />
-            <Button colorScheme="green" type="submit" px={8}>
+            <Button colorScheme="blue" type="submit" px={8}>
               <FaPlus />
             </Button>
           </HStack>
